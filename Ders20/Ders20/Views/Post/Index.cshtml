@@ -1,5 +1,29 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model List<Ders20.Models.Entities.Posts>
+
+<h1>Posts</h1>
+
+<table class="table table-striped table-bordered">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Content</th>
+        <th>CreatedAt</th>
+        <th>CreatedBy</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var post in Model)
+    {
+        <tr>
+            <td>@post.Id</td>
+            <td>@post.Title</td>
+            <td>@post.Content</td>
+            <td>@post.CreatedAt</td>
+            <td>@post.CreatedBy</td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<a asp-action="Create" asp-controller="Post" class="btn btn-primary">Create New Post</a>
