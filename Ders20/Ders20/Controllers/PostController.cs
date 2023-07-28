@@ -35,9 +35,9 @@ namespace Ders20.Controllers
 
             _dbContext.Posts.Add(post);
             _dbContext.SaveChanges();
-            ViewBag.Message = $"Post Created Successfully!{post.Id}";
+            ViewBag.Message = $"Post {post.Id} Created Successfully!";
 
-            return RedirectToAction("Index");
+            return View();
         }
 
         [HttpGet]
@@ -55,16 +55,16 @@ namespace Ders20.Controllers
             {
                 ViewBag.Message = "Invalid data!.";
 
-                return this.View();
+                return View();
             }
 
             Posts? dbEntity = this._dbContext.Posts.SingleOrDefault(post => post.Id == id);
 
             if (dbEntity is null)
             {
-                ViewBag.Message = "Product Not Found!";
+                ViewBag.Message = "Post Not Found!";
 
-                return this.View();
+                return View();
             }
 
             dbEntity.Title = post.Title;
@@ -74,8 +74,28 @@ namespace Ders20.Controllers
 
             this._dbContext.Posts.Update(dbEntity);
             this._dbContext.SaveChanges();
-            ViewBag.Message = "Posts Updated Succesfully.";
+            ViewBag.Message = "Post Updated Succesfully.";
 
+            return View();
+        }
+
+        [HttpGet]
+
+        public IActionResult Delete([FromRoute] int id)
+        {
+            var dbEntity = _dbContext.Posts.SingleOrDefault(post => post.Id == id);
+            if (dbEntity is null)
+            {
+                ViewBag.Message = "Post cannot found!.";
+
+                return View();
+            }
+
+            _dbContext.Posts.Remove(dbEntity);
+            _dbContext.SaveChanges();
+
+            ViewBag.Message = "Post deleted successfully.";
+            
             return View();
         }
     }
