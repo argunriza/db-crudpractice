@@ -1,0 +1,31 @@
+﻿@model Ders20.Models.Entities.Posts
+
+@if (!string.IsNullOrWhiteSpace(ViewBag.Message))
+{
+    <span>@ViewBag.Message</span>
+}
+
+<form asp-action="Create" asp-controller="Post" method="post">
+    <div class="form-group">
+        <label asp-for="Title">Title:</label> 
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Content">Content:</label> 
+        <input asp-for="Content" class="form-control" />
+        <span asp-validation-for="Content" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CreatedAt">Created At:</label> 
+        <input asp-for="CreatedAt" class="form-control" />
+        <span asp-validation-for="CreatedAt" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CreatedBy">Created By:</label> 
+        <input asp-for="CreatedBy" class="form-control" />
+        <span asp-validation-for="CreatedBy" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Create</button>
+</form>
+<partial name="_ValidationScriptsPartial" />
